@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Behavioral Engagement</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .feature-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#">Student Behavioral Engagement</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    {% if logged_in %}
+                        <li class="nav-item">
+                            <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="p-5 mb-4 bg-light rounded-3 shadow-sm">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">Enhancing Student Engagement in Blended Learning</h1>
+                <p class="col-md-8 fs-5">Blended learning combines traditional face-to-face instruction with digital learning tools. Analyzing multidimensional data, such as facial expressions, physiological responses, and interactive feedback, provides valuable insights into student engagement, improving the overall learning experience.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <h3 class="text-center fw-bold">Student Engagement Features</h3>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card shadow-sm feature-card">
+                    <img src="/static/sleepy.jpg" class="card-img-top" alt="Sleepy">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Sleepy</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm feature-card">
+                    <img src="/static/Yawning.jpg" class="card-img-top" alt="Yawning">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Yawning</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm feature-card">
+                    <img src="/static/boredom.jpg" class="card-img-top" alt="Boredom">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Boredom</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm feature-card">
+                    <img src="/static/confusion.jpg" class="card-img-top" alt="Boredom">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Confusion</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm feature-card">
+                    <img src="/static/engagement.jpg" class="card-img-top" alt="Boredom">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Engagement</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm feature-card">
+                    <img src="/static/frustration.jpg" class="card-img-top" alt="Boredom">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Frustration</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if logged_in %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="p-4 bg-info text-white rounded shadow">
+                    <h4>Individual Behavioral Testing</h4>
+                    <p>Analyzing a single student's engagement and emotional responses in a learning environment.</p>
+                    <a href="{{ url_for('individual_testing') }}" class="btn btn-light">Start Test</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4 bg-success text-white rounded shadow">
+                    <h4>Live Testing</h4>
+                    <p>Real-time monitoring of student behavior and engagement using live video analysis.</p>
+                    <a href="{{ url_for('live_testing') }}" class="btn btn-light">Start Live Test</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4 bg-warning text-dark rounded shadow">
+                    <h4>Multiple People Video Testing</h4>
+                    <p>Evaluating engagement levels of multiple students simultaneously in a blended learning environment.</p>
+                    <a href="{{ url_for('multiple_video_testing') }}" class="btn btn-dark">Start Group Test</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content shadow-sm">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{{ url_for('login') }}">
+                        <div class="mb-3">
+                            <label for="userid" class="form-label">User ID</label>
+                            <input type="text" class="form-control" name="userid" placeholder="Enter your User ID">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" placeholder="Enter your Password">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
